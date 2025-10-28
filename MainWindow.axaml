@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="KeyShow.MainWindow"
+        Width="200" Height="80"
+        Background="Transparent"
+        TransparencyLevelHint="AcrylicBlur"
+        CanResize="False"
+        SystemDecorations="None"
+        Topmost="True">
+
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Inställningar" Click="OpenSettings_Click"/>
+        </ContextMenu>
+    </Window.ContextMenu>
+
+    <Grid>
+        <Border Name="KeyBorder"
+                Background="#AA000000"
+                CornerRadius="12"
+                Padding="16"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Opacity="0">
+            <TextBlock Name="KeyText"
+                       Text="..."
+                       Foreground="White"
+                       FontSize="36"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap"/>
+        </Border>
+    </Grid>
+</Window>
