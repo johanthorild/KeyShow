@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: dotnet restore KeyShow.csproj
+
+      - name: Build (Release)
+        run: dotnet build KeyShow.csproj -c Release
+
+      - name: Publish win-x64
+        run: |
+          dotnet publish KeyShow.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=false -o publish/win-x64
+
+      - name: Publish win-arm64
+        run: |
+          dotnet publish KeyShow.csproj -c Release -r win-arm64 --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=false -o publish/win-arm64
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: |
+            Release ${{ github.ref_name }}
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload win-x64 artifact
+        uses: softprops/action-gh-release@v1
+        with:
+          files: publish/win-x64/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload win-arm64 artifact
+        uses: softprops/action-gh-release@v1
+        with:
+          files: publish/win-arm64/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

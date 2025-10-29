@@ -9,9 +9,8 @@ public class SettingsViewModel : ReactiveObject
     private readonly Settings _settings;
     private readonly Window _window;
 
-    // Backing fields
     private int _displayTimeMs;
-    private string _position = "BottomRight";
+    private string _position = "TopLeft";
 
     public int DisplayTimeMs
     {
@@ -31,8 +30,6 @@ public class SettingsViewModel : ReactiveObject
     {
         _settings = settings;
         _window = window;
-
-        // Init fields från settings
         _displayTimeMs = settings.DisplayTimeMs;
         _position = settings.Position;
 
@@ -41,7 +38,6 @@ public class SettingsViewModel : ReactiveObject
 
     private void SaveAndClose()
     {
-        // Kopiera tillbaka till settings
         _settings.DisplayTimeMs = _displayTimeMs;
         _settings.Position = _position;
 

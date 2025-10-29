@@ -1,34 +1,45 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="KeyShow.MainWindow"
-        Width="200" Height="80"
-        Background="Transparent"
-        TransparencyLevelHint="AcrylicBlur"
-        CanResize="False"
-        SystemDecorations="None"
-        Topmost="True">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="KeyShow.MainWindow"
+    SizeToContent="WidthAndHeight"
+    MinWidth="200" MinHeight="80"
+    Background="Transparent"
+    TransparencyLevelHint="AcrylicBlur"
+    CanResize="False"
+    SystemDecorations="None"
+    Topmost="True"
+    PointerPressed="Window_PointerPressed"
+    PointerReleased="Window_PointerReleased">
 
     <Window.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Inställningar" Click="OpenSettings_Click"/>
+            <MenuItem Header="Settings" Click="OpenSettings_Click"/>
+            <MenuItem Header="Quit" Click="Quit_Click"/>
         </ContextMenu>
     </Window.ContextMenu>
 
-    <Grid>
-        <Border Name="KeyBorder"
-                Background="#AA000000"
-                CornerRadius="12"
-                Padding="16"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Opacity="0">
-            <TextBlock Name="KeyText"
-                       Text="..."
-                       Foreground="White"
-                       FontSize="36"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       TextWrapping="Wrap"/>
-        </Border>
-    </Grid>
+    <Border Name="WindowBorder"
+            Background="Transparent"
+            BorderBrush="#66FFFFFF"
+            BorderThickness="1"
+            CornerRadius="4"
+            Padding="4">
+        <Grid>
+            <Border Name="KeyBorder"
+                    Background="#AA000000"
+                    CornerRadius="10"
+                    Padding="12"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Opacity="0">
+                <TextBlock Name="KeyText"
+                           Text="..."
+                           Foreground="White"
+                           FontSize="34"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextWrapping="NoWrap"/>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

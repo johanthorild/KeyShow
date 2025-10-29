@@ -4,6 +4,19 @@ KeyShow is a small .NET desktop application that displays keyboard input and key
 
 ![HelloWorldGif](HelloWorld.gif)
 
+## Features
+
+- Shows the last pressed key and active modifiers on-screen.
+- Adjustable display duration via Settings (Display time in milliseconds).
+- Drag the window anywhere; the position is persisted and restored on next run.
+- Settings are persisted to `%APPDATA%\KeyShow\settings.json` on Windows.
+- Context menu includes Settings and Quit actions.
+
+## Requirements
+
+- .NET SDK 9.0 or later (installed)
+- Windows when using the provided `WindowsKeyboardListener` implementation
+
 ## Contents
 
 - `Program.cs` — application entry point
@@ -12,12 +25,6 @@ KeyShow is a small .NET desktop application that displays keyboard input and key
 - `IKeyboardListener.cs`, `WindowsKeyboardListener.cs` — keyboard-listening abstraction and Windows implementation
 - `Settings.*` — app settings and view model
 - `KeyInfo.cs` — key model
-
-## Requirements
-
-- .NET SDK 9.0 or later (installed)
-- Windows when using the provided `WindowsKeyboardListener` implementation
-- Recommended: Visual Studio 2022/2023, Rider, or VS Code with C# plugin for development
 
 ## Build and run (PowerShell)
 
@@ -47,10 +54,26 @@ dotnet build KeyShow.sln -c Debug
 dotnet publish .\KeyShow.csproj -c Release -r win-x64 --self-contained true -o .\publish\win-x64
 ```
 
+Or use the included helper script to produce and zip artifacts locally:
+
+```powershell
+.\scripts\publish-local.ps1 -Version 0.1.0
+```
+
 ## Notes
 
 - The project includes a `.gitignore` to exclude build artifacts and IDE-specific files.
 - If you run on non-Windows platforms, the Windows-specific keyboard listener will not be used; add/implement a platform listener as needed.
+
+## Release
+
+- The project is configured for release automation. Push an annotated tag (for example `v0.1.0`) and the included GitHub Actions workflow (`.github/workflows/release.yml`) will build and publish Windows artifacts and create a GitHub Release.
+- You can also run `scripts/publish-local.ps1` locally to produce zipped artifacts in `./publish/`.
+
+## Changelog & License
+
+- See `CHANGELOG.md` for what changed in each release.
+- This project includes an `LICENSE` file (MIT) — add or change if you prefer another license.
 
 ## Troubleshooting
 
@@ -74,8 +97,4 @@ Contributions are welcome. Open an issue or submit a pull request with a clear d
 
 ## License
 
-Add a LICENSE file to indicate the project license. If none is provided, assume source is under no specific license until one is added.
-
----
-
-Generated on October 28, 2025
+Generated on October 29, 2025

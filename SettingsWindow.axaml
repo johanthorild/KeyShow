@@ -2,29 +2,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="KeyShow.SettingsWindow"
         Width="300" Height="200"
-        Title="Inställningar">
+    Title="Settings">
 
-    <StackPanel Margin="16" Spacing="12">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-            <TextBlock Text="Visningstid (ms):" VerticalAlignment="Center"/>
-            <TextBox Name="DisplayTimeTextBox" Width="80"/>
+        <ScrollViewer Grid.Row="0" Margin="16" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="12">
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <TextBlock Text="Display time (ms):" VerticalAlignment="Center"/>
+                    <TextBox Name="DisplayTimeTextBox" Width="80"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <TextBlock Text="Start position:" VerticalAlignment="Center"/>
+                    <ComboBox Name="PositionComboBox" Width="140">
+                        <ComboBoxItem Content="TopLeft"/>
+                        <ComboBoxItem Content="TopRight"/>
+                        <ComboBoxItem Content="BottomLeft"/>
+                        <ComboBoxItem Content="BottomRight"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="16" Spacing="8">
+            <Button Content="Save" Click="OnSaveClick"/>
+            <Button Content="Cancel" Click="OnCancelClick"/>
         </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-            <TextBlock Text="Fönsterposition:" VerticalAlignment="Center"/>
-            <ComboBox Name="PositionComboBox" Width="120">
-                <ComboBoxItem Content="TopLeft"/>
-                <ComboBoxItem Content="TopRight"/>
-                <ComboBoxItem Content="BottomLeft"/>
-                <ComboBoxItem Content="BottomRight"/>
-            </ComboBox>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
-            <Button Content="Spara" Click="OnSaveClick"/>
-            <Button Content="Avbryt" Click="OnCancelClick"/>
-        </StackPanel>
-
-    </StackPanel>
+    </Grid>
 </Window>
